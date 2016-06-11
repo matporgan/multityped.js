@@ -1,16 +1,15 @@
-
 // Grab node packages
 var gulp = require('gulp'),
-    rename = require('gulp-rename')
+    rename = require('gulp-rename'),
+    concat = require('gulp-concat'),
     uglify = require('gulp-uglify');
 
  
-gulp.task('compress', function() {
-  gulp.src('js/*.js')
-    .pipe(uglify())
-    .pipe(rename('typed.min.js'))
-    .pipe(gulp.dest('dist'))
+gulp.task('default', function() {
+    gulp.src(['js/multityped.js', 'js/typed.js'])
+        .pipe(concat('multityped.js'))
+        .pipe(gulp.dest('dist'))
+        .pipe(rename('multityped.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'));
 });
-
-// Default Task
-gulp.task('default', ['compress']);
